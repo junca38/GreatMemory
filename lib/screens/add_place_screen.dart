@@ -34,7 +34,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
         title: Text("Add a new place"),
       ),
       body: Column(
-        //doesn't need mainAxis when we have expanded
+        //doesn't need mainAxis when we have expanded column
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
