@@ -37,6 +37,7 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
     if (selectedLocation == null) return;
 
     print(selectedLocation.latitude);
+    print(selectedLocation.longitude);
   }
 
   @override
