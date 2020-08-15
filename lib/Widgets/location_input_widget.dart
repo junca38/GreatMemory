@@ -1,5 +1,7 @@
 import 'package:GreatMemory/helpers/location_help.dart';
+import 'package:GreatMemory/screens/map_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class LocationInputWidget extends StatefulWidget {
@@ -23,6 +25,20 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
     });
   }
 
+  Future<void> _selectOnMap() async {
+    final LatLng selectedLocation =
+        await Navigator.of(context).push<LatLng>(MaterialPageRoute(
+      fullscreenDialog: true,
+      builder: (context) => MapScreen(
+        isSelected: true,
+      ),
+    ));
+
+    if (selectedLocation == null) return;
+
+    print(selectedLocation.latitude);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +51,7 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
             border: Border.all(width: 1, color: Colors.grey),
           ),
           child: (_previewImgURL == null)
-              ? Text('No location chosen yet.', textAlign: TextAlign.center)
+              ? Text('No location chosen yet', textAlign: TextAlign.center)
               : Image.network(
                   _previewImgURL,
                   fit: BoxFit.cover,
@@ -52,7 +68,7 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
               textColor: Theme.of(context).primaryColor,
             ),
             FlatButton.icon(
-              onPressed: null,
+              onPressed: _selectOnMap,
               icon: Icon(Icons.map),
               label: Text('Select on Map'),
               textColor: Theme.of(context).primaryColor,
