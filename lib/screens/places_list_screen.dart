@@ -1,5 +1,6 @@
 import 'package:GreatMemory/Providers/user_places.dart';
 import 'package:GreatMemory/screens/add_place_screen.dart';
+import 'package:GreatMemory/screens/place_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,12 @@ class PlacesListScreen extends StatelessWidget {
                                   FileImage(userPlaces.items[i].image)),
                           title: Text(userPlaces.items[i].title),
                           subtitle: Text(userPlaces.items[i].location.address),
-                          onTap: null,
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              PlaceDetailScreen.routeName,
+                              arguments: userPlaces.items[i].id,
+                            );
+                          },
                         ),
                       ),
               ),
