@@ -49,7 +49,11 @@ class UserPlaces with ChangeNotifier {
               id: item['id'],
               title: item['title'],
               image: File(item['image']),
-              location: null,
+              location: PlaceLocation(
+                latitude: item['loc_lat'],
+                longitude: item['loc_long'],
+                address: item['address'],
+              ),
             ))
         .toList();
     notifyListeners();
