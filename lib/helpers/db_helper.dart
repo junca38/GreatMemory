@@ -17,7 +17,7 @@ class DBHelper {
       }, version: 1);
     } catch (e) {
       print(e);
-      print("create or open error");
+      print("create or open db error");
     }
     return db;
   }
@@ -30,8 +30,7 @@ class DBHelper {
           conflictAlgorithm: sql.ConflictAlgorithm.replace);
     } catch (e) {
       print(e);
-      print(
-          "insert error, probably something wrong with the table. You might want to check if the table exist or not.");
+      print("insert error, probably something wrong with the table.");
     }
   }
 

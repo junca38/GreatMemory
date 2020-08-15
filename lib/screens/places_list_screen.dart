@@ -20,25 +20,26 @@ class PlacesListScreen extends StatelessWidget {
       body: FutureBuilder(
         future:
             Provider.of<UserPlaces>(context, listen: false).fetchAndSetPlaces(),
-        builder: (context, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
-                ? Center(child: CircularProgressIndicator())
-                : Consumer<UserPlaces>(
-                    child: Center(child: const Text("No data yet")),
-                    builder: (context, userPlaces, ch) =>
-                        userPlaces.items.length <= 0
-                            ? ch
-                            : ListView.builder(
-                                itemCount: userPlaces.items.length,
-                                itemBuilder: (context, i) => ListTile(
-                                  leading: CircleAvatar(
-                                      backgroundImage:
-                                          FileImage(userPlaces.items[i].image)),
-                                  title: Text(userPlaces.items[i].title),
-                                  onTap: null,
-                                ),
-                              ),
-                  ),
+        builder: (context, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(child: CircularProgressIndicator())
+            : Consumer<UserPlaces>(
+                child: Center(child: const Text("No data yet")),
+                builder: (context, userPlaces, ch) => userPlaces.items.length <=
+                        0
+                    ? ch
+                    : ListView.builder(
+                        itemCount: userPlaces.items.length,
+                        itemBuilder: (context, i) => ListTile(
+                          leading: CircleAvatar(
+                              backgroundImage:
+                                  FileImage(userPlaces.items[i].image)),
+                          title: Text(userPlaces.items[i].title),
+                          subtitle: Text(userPlaces.items[i].location.address),
+                          onTap: null,
+                        ),
+                      ),
+              ),
       ),
     );
   }
