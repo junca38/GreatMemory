@@ -13,7 +13,7 @@ class DBHelper {
     try {
       db = await sql.openDatabase(pather, onCreate: (db, version) {
         return db.execute(
-            "CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT)");
+            "CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT, loc_lat REAL, loc_long REAL, address TEXT)");
       }, version: 1);
     } catch (e) {
       print(e);
