@@ -7,11 +7,11 @@ class DBHelper {
   static Future<Database> database() async {
     /// get the db path first
     final dbPath = await sql.getDatabasesPath();
-    final pather = path.join(dbPath, 'places.db');
-    var db;
+    Database db;
 
     try {
-      db = await sql.openDatabase(pather, onCreate: (db, version) {
+      db = await sql.openDatabase(path.join(dbPath, 'places.db'),
+          onCreate: (db, version) {
         return db.execute(
             "CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT, loc_lat REAL, loc_long REAL, address TEXT)");
       }, version: 1);
@@ -22,7 +22,7 @@ class DBHelper {
     return db;
   }
 
-  /// sql insert
+  /// Given the tablename and the data, do sql insert
   static Future<void> insert(String table, Map<String, Object> data) async {
     final db = await DBHelper.database();
     try {
@@ -34,6 +34,7 @@ class DBHelper {
     }
   }
 
+  /// return all records inside a table
   static Future<List<Map<String, dynamic>>> getData(String table) async {
     final db = await DBHelper.database();
     return await db.query(table);

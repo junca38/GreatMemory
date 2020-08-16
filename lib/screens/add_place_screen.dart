@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:GreatMemory/Providers/user_places.dart';
 
+/// screen to add location to system
 class AddPlaceScreen extends StatefulWidget {
   static const routeName = '/add-place';
   @override
@@ -25,6 +26,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     _pickedLocation = PlaceLocation(latitude: lat, longitude: long);
   }
 
+  /// use the provider to store title, image path and location detail
   void _savePlace() {
     if (_titleController.text.isEmpty ||
         _pickedImage == null ||
@@ -38,6 +40,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     Navigator.of(context).pop();
   }
 
+  /// ask user to input locaiton name, take a picture and select a place on map
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,13 +58,18 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
+                    /// location title
                     TextField(
                       decoration: InputDecoration(labelText: 'Title'),
                       controller: _titleController,
                     ),
                     SizedBox(height: 10),
+
+                    /// widget to handle camera and showing the image
                     ImageInputWidget(_selectImage),
                     SizedBox(height: 10),
+
+                    /// widget to show the location on map
                     LocationInputWidget(_selectPlace),
                   ],
                 ),

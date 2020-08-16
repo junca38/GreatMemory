@@ -4,6 +4,7 @@ import 'package:GreatMemory/Models/place.dart';
 import 'package:GreatMemory/helpers/db_helper.dart';
 import 'package:GreatMemory/helpers/location_help.dart';
 
+/// provider class to handle the list of locations and details within the app
 class UserPlaces with ChangeNotifier {
   static const String ktableName = 'user_places';
   List<Place> _items = [];
@@ -12,15 +13,17 @@ class UserPlaces with ChangeNotifier {
     return [..._items];
   }
 
+  /// return the place object in the list by given id
   Place findById(String id) {
     return _items.firstWhere((item) => item.id == id);
   }
 
+  /// storing the place details into the list, then insert into database
   Future<void> addPlace(String pickedTitle, File pickedImage,
       PlaceLocation pickedLocation) async {
     final String addr = await LocationHelp.getPlaceAddress(
         latitude: pickedLocation.latitude, longitude: pickedLocation.longitude);
-    final updatedLocation = PlaceLocation(
+    final newLocation = PlaceLocation(
       latitude: pickedLocation.latitude,
       longitude: pickedLocation.longitude,
       address: addr,
@@ -29,7 +32,7 @@ class UserPlaces with ChangeNotifier {
     final newPlace = Place(
         id: DateTime.now().toString(),
         image: pickedImage,
-        location: updatedLocation,
+        location: newLocation,
         title: pickedTitle);
     _items.add(newPlace);
     notifyListeners();
@@ -46,6 +49,7 @@ class UserPlaces with ChangeNotifier {
     );
   }
 
+  /// fetch the location list from database
   Future<void> fetchAndSetPlaces() async {
     final dataList = await DBHelper.getData(ktableName);
     _items = dataList

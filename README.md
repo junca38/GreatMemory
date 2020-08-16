@@ -1,16 +1,26 @@
 # GreatMemory
 
-A new Flutter project.
+Simple app that user can take pictures and store location information
 
-## Getting Started
+## Demo
 
-This project is a starting point for a Flutter application.
+https://youtu.be/izeFybIHo1g
 
-A few resources to get you started if this is your first Flutter project:
+## How to use:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- require google's GCP apikey in location_help.dart
+- In android/app/src/main/AndroidManifest.xml, add keys
+  - https://pub.dev/packages/google_maps_flutter
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tech highlight:
+
+1. Image picker package
+   - To handle camera functionality
+1. Path and Path Provider packages
+   - To handle file path and extension inside the system
+1. Location package
+   - To get system location and related information
+1. Google Map package
+   - widget to dynamically generate google map
+1. SQFLITE
+   - local database to store location information and path to the image

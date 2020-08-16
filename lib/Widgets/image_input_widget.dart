@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
+/// specificly handle image in add_place_screen.dart
 class ImageInputWidget extends StatefulWidget {
   final Function onSelectImage;
   ImageInputWidget(this.onSelectImage);
@@ -17,6 +18,7 @@ class _ImageInputWidgetState extends State<ImageInputWidget> {
   final _picker = ImagePicker();
   Directory appDir;
 
+  /// take picture from camera
   Future<void> _getImage() async {
     /// take the picture
     final _imagePicker = await _picker.getImage(
@@ -59,6 +61,8 @@ class _ImageInputWidgetState extends State<ImageInputWidget> {
           decoration: BoxDecoration(
             border: Border.all(width: 1, color: Colors.grey),
           ),
+
+          /// show the image that was just taken or tell user to take one
           child: (_image != null)
               ? Image.file(
                   _image,
@@ -66,7 +70,7 @@ class _ImageInputWidgetState extends State<ImageInputWidget> {
                   width: double.infinity,
                 )
               : Text(
-                  'No image yet',
+                  'No image yet, please take one',
                   textAlign: TextAlign.center,
                 ),
           alignment: Alignment.center,
